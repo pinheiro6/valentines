@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine?</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 350px;
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .yes:hover {
+      transform: scale(1.1);
+    }
+
+    .no {
+      background: #ddd;
+      color: #333;
+      position: relative;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.6);
+      font-size: 20px;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    .message {
+      display: none;
+      font-size: 22px;
+      color: #ff4d6d;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey Ria Thangu ❤️</h1>
+    <p>Every moment with you feels special.<br>Will you be my Valentine?</p>
+
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">Yes 💖</button>
+      <button class="no" onmouseover="moveNo(this)">No 🙃</button>
+    </div>
+
+    <div class="message" id="message">
+      YAY!! You just made me the happiest 😭💘<br><br>
+      <span style="font-size:16px; color:#555;">Screenshot this. You’re mine now 😌❤️</span>
+    </div>
+  </div>
+
+  <script>
+    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    audio.loop = true;
+
+    function playMusic() {
+      audio.play();
+    }
+
+    function createConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'heart';
+        confetti.innerHTML = '💖';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 5000);
+      }
+    }
+    function sayYes() {
+      document.getElementById('message').style.display = 'block';
+      createHearts();
+      playMusic();
+      createConfetti();
+    }
+
+    let noCount = 0;
+
+    function moveNo(btn) {
+      noCount++;
+
+      if (noCount === 1) {
+        alert('bitch whaaaaaaaaaaaaaat? 😭');
+        btn.innerText = 'Nice try 😌';
+      }
+
+      const scale = Math.max(0.4, 1 - noCount * 0.1);
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      btn.style.transform = `scale(${scale}) translate(${x}px, ${y}px)`;
+    }
+
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }px, ${y}px)`;
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }
+    }
+  </script>
+
+</body>
+</html>

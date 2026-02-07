@@ -113,72 +113,77 @@
       <span style="font-size:16px; color:#555;">Screenshot this. You’re mine now 😌❤️</span>
     </div>
   </div>
+  
+<script>
+  console.log("JS loaded");
 
-  <script>
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-    audio.loop = true;
+  let noCount = 0;
 
-    function playMusic() {
-      audio.play();
+  const audio = new Audio(
+    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+  );
+  audio.loop = true;
+
+  function playMusic() {
+    audio.play().catch(() => {});
+  }
+
+  function sayYes() {
+    document.getElementById("message").style.display = "block";
+    playMusic();
+    createHearts();
+    createConfetti();
+  }
+
+  function moveNo(btn) {
+    noCount++;
+
+    if (noCount === 1) {
+      alert("bitch whaaaaaaaaaaaaaat? 😭");
+      btn.innerText = "Nice try 😌";
     }
 
-    function createConfetti() {
-      for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'heart';
-        confetti.innerHTML = '💖';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.fontSize = (Math.random() * 20 + 15) + 'px';
-        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        document.body.appendChild(confetti);
+    const scale = Math.max(0.4, 1 - noCount * 0.1);
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
 
-        setTimeout(() => confetti.remove(), 5000);
-      }
+    btn.style.transform = `scale(${scale}) translate(${x}px, ${y}px)`;
+  }
+
+  function createHearts() {
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration =
+        Math.random() * 3 + 3 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
     }
-    function sayYes() {
-      document.getElementById('message').style.display = 'block';
-      createHearts();
-      playMusic();
-      createConfetti();
+  }
+
+  function createConfetti() {
+    for (let i = 0; i < 30; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "heart";
+      confetti.innerHTML = "💖";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.fontSize =
+        Math.random() * 20 + 15 + "px";
+      confetti.style.animationDuration =
+        Math.random() * 2 + 2 + "s";
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 5000);
     }
-
-    let noCount = 0;
-
-    function moveNo(btn) {
-      noCount++;
-
-      if (noCount === 1) {
-        alert('bitch whaaaaaaaaaaaaaat? 😭');
-        btn.innerText = 'Nice try 😌';
-      }
-
-      const scale = Math.max(0.4, 1 - noCount * 0.1);
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 100;
-      btn.style.transform = `scale(${scale}) translate(${x}px, ${y}px)`;
-    }
-
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 100;
-      btn.style.transform = `translate(${x}px, ${y}px)`;
-    }px, ${y}px)`;
-    }
-
-    function createHearts() {
-      for (let i = 0; i < 20; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        document.body.appendChild(heart);
-
-        setTimeout(() => {
-          heart.remove();
-        }, 6000);
-      }
-    }
-  </script>
-
+  }
+</script>
+  
 </body>
 </html>
